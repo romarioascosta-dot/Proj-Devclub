@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>DevClub Store</title>
+    <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: "Montserrat", sans-serif;
+}
+
+body{
+    background-color: #0f0f1e;
+    color: #fff;
+    font-size: 16px;
+    overflow: visible;
+}
+header {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    padding: 20px 50px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 3;
+}
+
+
+.logo {
+    font-family: "orbitron", sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #00f7ff;
+    text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+}
+
+header nav ul {
+    display: flex;
+    gap: 48px;
+
+}
+
+header nav ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 5px 0;
+}
+
+header nav ul li::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0px;
+    height: 2px;
+    background-color: #00f7ff;
+    transition: width 0.2s ease;
+}
+
+header nav ul li:hover::after {
+    width: 100%;
+}
+.content {
+    width: 55%;
+    margin-left: 10%;
+    padding: 20px 40px 20px 0;   /* espaçamento fixo e razoável, não % */
+    display: flex;
+    align-items: flex-start;      /* corrigido de "self-start" */
+    justify-content: center;
+    flex-direction: column;
+    z-index: 2;
+}
+
+
+
+.container{
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(135deg, #0f0f1e 0%, #1f1f3a 100%);
+    overflow: hidden;
+
+}
+
+.container::before {
+    content: '';
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 247, 255, 0.2) 0%, rgba(15, 15, 30, 0) 70%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(50px);
+    z-index: 1;
+    animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { 
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(0.8);
+
+}
+100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.5);
+}
+}
+.list {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+
+}
+
+
+.item {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;              /* espaçamento controlado entre imagem e texto */
+    opacity: 0;
+    transition: transform 0.7s ease-in-out, opacity 0.7s ease-in-out;
+}
+
+.active {
+    opacity: 1;
+}
+
+.product-img {
+    width: 45%;
+    height: auto;            /* removido o 800% */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* removido margin: auto e margin-left: 300px */
+}
+
+
+.product-img img {
+    max-width: 100%;
+    margin: 5%;
+
+    filter: drop-shadow(0 0 30px rgba (0, 247, 255, 0.3));
+    
+    /* animação */
+    transform: translateX(200px);
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    transition-delay: 0.5s;
+
+}
+.active .product-img img {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+
+
+.content {
+    width: 45%;
+    padding: 0 40px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 2;
+}
+
+
+
+.product-tag {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: #00f7ff;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    font-size: clamp (1.2rem, 2vw, 2rem);
+        }
+
+.product-name {
+    font-size: 3rem;
+    font-family: "orbitron", sans-serif;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    transition-delay: 0.5s;
+    font-size: clamp (2rem, 4vw, 3.5rem);
+}
+  
+.active .product-name{
+    transform: translateX(0);
+    opacity: 1;
+}
+.description {
+    font-size: 1.5rem;
+    color: #b8b8d0;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 600px;
+    /* animação */
+    transform: translateX(400px);
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    transition-delay: 0.5s;
+
+}
+
+.active .description {
+
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.btn {
+    padding: 12px 16px;
+    background: linear-gradient(90deg, #00f7ff, #0066ff);
+    border-radius: 303px;
+    color: #000;
+    font-size: 1;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+
+}
+
+.arrows {
+    position: absolute;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+
+}
+
+.arrow-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 247, 255, 0.3);
+
+}   
+.arrow-btn:hover {
+    background-color: rgba(0, 247, 255, 0.2);
+    border-color: #00f7ff;
+
+}
+.indicators {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 5;
+}
+
+.numbers {
+font-family: "orbitron", sans-serif;
+font-size: 2rem;
+font-weight: 800;
+color: rgba(255, 255, 255, 0.2);
+font-size: clamp (1.5rem, 3vw, 2.5rem);
+}
+
+.dots {
+    display: flex;
+    gap: 10px;
+
+}
+.dot {
+    width: 40px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+
+
+}
+.dot.active {
+    background-color: #00f7ff;
+    box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+    
+
+}
+.tech-circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+}
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 247, 255, 0.2);
+
+}
+.circle:nth-child(1) {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    left: 10%;
+
+}
+.circle:nth-child(2) {
+    width: 300px;
+    height: 300px;
+    top: 70%;
+    left: 70%;
+}
+.circle:nth-child(3) {
+    width: 150px;
+    height: 150px;
+    top: 70%;
+    left: 20%;
+}
+.circle:nth-child(4) {
+    width: 120px;
+    top: 10%;
+    height: 120px;
+    left: 70%;
+}
+</style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">DevClub Store</div>
+      <nav>
+        <ul>
+          <li>Home</li>
+          <li>Produtos</li>
+          <li>Contatos</li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <div class="tech-cicle">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+      <div class="list">
+        <div class="item active">
+          <div class="product-img">
+
+            <img src="img/apple-watch.jpg" height="400" alt="Apple Watch" />
+          </div>
+          <div class="content">
+            <p class="product-tag">Alta Performance</p>
+            <p class="product-name">Apple Watch Séries 10</p>
+            <p class="description">
+              Apple Watch traz para você uma enorme gama de benefícios, desde um
+              horário sempre atualizado, cronômetro e também conta com internet
+              Wi-Fi.
+            </p>
+            <button class="btn">Saiba Mais</button>
+          </div>
+        </div>
+       
+        <div class="item">
+
+          <div class="product-img">
+
+            <img src="img/airpods-max.webp" height="300" alt="airpods max" />
+          </div>
+
+          <div class="content">
+            <p class="product-tag">Alta Performance</p>
+            <p class="product-name">air pods max</p>
+            <p class="description">
+              Experimente o som na sua forma mais pura,Cancelamento de ruido
+              adaptativo, qualidade de áudio excepcional e design ergonomico
+              para maximo conforto. Sua musica nunca soou tão bem.
+            </p>
+            <button class="btn">Saiba Mais</button>
+          </div>
+        </div>
+    
+        <div class="item">
+          <div class="product-img">
+            <img src="img/vision-pro.webp" height="300" alt="Vision-pro" />
+          </div>
+          <br />
+          <br />
+          <div class="content">
+            <p class="product-tag">Alta Performance</p>
+            <p class="product-name">Vision pró</p>
+            <p class="description">
+              Realidade aumentada imersiva com Apple Vision Pró, inovação ao
+              alcance dos seus olhos.
+            </p>
+            <button class="btn">Saiba Mais</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="arrows">
+        <button class="arrow-btn" id="prev">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+  <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+</svg>
+        </button>
+        <button class="arrow-btn" id="next">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+  <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+</svg>
+        </button>
+        </div>
+      <div class="indicators">
+
+        <div class="numbers">01</div>
+        <div class="dots">
+
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+    </main>
+
+      <script>
+    const prevButton = document.getElementById('prev')
+const nextButton = document.getElementById('next')
+const items = document.querySelectorAll('.item')
+const dots = document.querySelectorAll('.dot')
+const numberIndicator = document.querySelector('.numbers')
+const list = document.querySelector('.list')
+
+let active = 0;
+const total = items.length
+let timer;
+
+function update (direction){
+
+
+    document.querySelector('.item.active').classList.remove('active')
+    document.querySelector('.dot.active').classList.remove('active')
+
+
+    if(direction > 0) {
+        active = active + 1
+
+        if(active === total) {
+            active = 0
+        }
+    } else if(direction < 0){
+        active = active -1
+
+        if(active < 0) {
+            active = total -1
+        }
+    }
+
+        items[active].classList.add('active')
+        dots[active].classList.add('active')
+
+        numberIndicator.textContent = String(active + 1).padStart (2, '0')
+    }
+
+
+
+clearInterval(timer)
+timer = setInterval(() => {
+    update(1)
+
+}, 5000);
+
+
+prevButton.addEventListener('click', () => {
+    update(-1)
+})
+
+nextButton.addEventListener('click', () => {
+    update(1)
+})
+  </script>
+
+  </body>
+
+</html>
